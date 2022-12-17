@@ -9,12 +9,16 @@ import { ILogService } from "../../core/gateways/services/ILogService";
 import { HttpServer } from "../servers/HttpServer";
 import { Server } from "http";
 import { ApiAuthenticator } from "./ApiAuthenticator";
+
 export class ApiService {
   static init(port: number, callback?: () => void): Server {
     const app = express();
     const logger = Container.get<ILogService>("log.service");
     app.get("/", (_req, res) => {
       res.status(200).end("ok");
+    });
+    app.get("/.well-known/pki-validation/9B563427C47D81779852B5EA9D17FB10.txt", (_req, res) => {
+      res.sendFile('./9B563427C47D81779852B5EA9D17FB10.txt')
     });
 
     const loggingMiddleware = logger.createMiddleware();

@@ -18,8 +18,8 @@ export class ApiService2 {
     app.get("/", (_req, res) => {
       res.status(200).end("ok");
     });
-    app.get("/.well-known/pki-validation/1F7DE192245FF311D2556D6C890BB999.txt", (_req, res) => {
-      res.sendFile('/home/ec2-user/dev-dols/1F7DE192245FF311D2556D6C890BB999.txt')
+    app.get("/.well-known/pki-validation/27E7AEDA4DCCE24B80EEF67289EA7DF5.txt", (_req, res) => {
+      res.sendFile('/home/ec2-user/dev-dols/27E7AEDA4DCCE24B80EEF67289EA7DF5.txt')
     });
     const key = fs.readFileSync('./src/private.key');
     const cert= fs.readFileSync('./src/certificate.crt')

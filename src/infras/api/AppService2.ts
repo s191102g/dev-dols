@@ -37,7 +37,7 @@ export class ApiService2 {
     app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(spec));
      httpServer.start(port, callback);
      https.createServer({ key, cert })
-     .listen(3002,()=>{
+     .listen(8000,()=>{
       console.log('https');
       
      })

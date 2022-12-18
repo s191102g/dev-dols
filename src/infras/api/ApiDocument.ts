@@ -35,6 +35,10 @@ export class ApiDocument {
         {
           url: `http://apiservice-env.eba-vgrg7cua.us-east-1.elasticbeanstalk.com/`,
           description: "Production",
+        },
+        {
+          url: `https://3.84.99.235:8000/`,
+          description: "Production https",
         }
         
       

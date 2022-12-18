@@ -17,8 +17,8 @@ export class ApiService {
     app.get("/", (_req, res) => {
       res.status(200).end("ok");
     });
-    app.get("/.well-known/pki-validation/9B563427C47D81779852B5EA9D17FB10.txt", (_req, res) => {
-      res.sendFile('/home/ec2-user/dev-dols/9B563427C47D81779852B5EA9D17FB10.txt')
+    app.get("/.well-known/pki-validation/1F7DE192245FF311D2556D6C890BB999.txt", (_req, res) => {
+      res.sendFile('/home/ec2-user/dev-dols/1F7DE192245FF311D2556D6C890BB999.txt')
     });
 
     const loggingMiddleware = logger.createMiddleware();

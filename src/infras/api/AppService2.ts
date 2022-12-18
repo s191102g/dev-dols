@@ -36,7 +36,7 @@ export class ApiService2 {
     const spec = ApiDocument.generate(options);
     app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(spec));
      httpServer.start(port, callback);
-     https.createServer({ key, cert })
+     https.createServer({ key, cert }, app)
      .listen(8000,()=>{
       console.log('https');
       

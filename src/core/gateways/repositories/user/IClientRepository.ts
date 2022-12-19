@@ -9,5 +9,6 @@ export class FindAllClientFilter extends DbPaginationFilter {
 export interface IClientRepository extends IBaseRepository<string,Client>{
     CheckUserExist(param:string): Promise<boolean>;
     getByEmail(email:string): Promise<Client | null>;
-    findAndCount( param: FindAllClientFilter): Promise<[Client[], number]>
+    findAndCount( param: FindAllClientFilter): Promise<[Client[], number]>;
+    getByYear(yearStart:string,yearEnd:string):Promise<number>
 }

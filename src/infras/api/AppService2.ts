@@ -4,8 +4,8 @@ import path from "path";
 import { RoutingControllersOptions } from "routing-controllers";
 import { ApiDocument } from "./ApiDocument";
 import swaggerUiExpress from "swagger-ui-express";
-import Container from "typedi";
-import { ILogService } from "../../core/gateways/services/ILogService";
+// import Container from "typedi";
+// import { ILogService } from "../../core/gateways/services/ILogService";
 import { HttpServer } from "../servers/HttpServer";
 // import { Server } from "http";
 import { ApiAuthenticator } from "./ApiAuthenticator";
@@ -14,7 +14,7 @@ import * as https from 'https'
 export class ApiService2 {
   static init(port: number, callback?: () => void): void {
     const app = express();
-    const logger = Container.get<ILogService>("log.service");
+    // const logger = Container.get<ILogService>("log.service");
     app.get("/", (_req, res) => {
       res.status(200).end("ok");
     });
@@ -23,8 +23,8 @@ export class ApiService2 {
     });
     const key = fs.readFileSync('./src/private.key');
     const cert= fs.readFileSync('./src/certificate.crt')
-    const loggingMiddleware = logger.createMiddleware();
-    app.use(loggingMiddleware);
+    // const loggingMiddleware = logger.createMiddleware();
+    // app.use(loggingMiddleware);
     const options = this.getOptions({
       controllers: [path.join(__dirname + "/controllers/**/*{.js,.ts}")],
       middlewares: [path.join(__dirname, "./middlewares/*Middleware{.js,.ts}")],

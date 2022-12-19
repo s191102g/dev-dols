@@ -21,8 +21,8 @@ export class ApiService2 {
     app.get("/.well-known/pki-validation/27E7AEDA4DCCE24B80EEF67289EA7DF5.txt", (_req, res) => {
       res.sendFile('/home/ec2-user/dev-dols/27E7AEDA4DCCE24B80EEF67289EA7DF5.txt')
     });
-    const key = fs.readFileSync('./src/private.key');
-    const cert= fs.readFileSync('./src/certificate.crt')
+    const key = fs.readFileSync('/home/ec2-user/dev-dols/private.key');
+    const cert= fs.readFileSync('/home/ec2-user/dev-dols/certificate.crt')
     // const loggingMiddleware = logger.createMiddleware();
     // app.use(loggingMiddleware);
     const options = this.getOptions({

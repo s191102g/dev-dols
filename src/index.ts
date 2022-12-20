@@ -2,8 +2,8 @@
 import "./infras/SingletonRegister";
 
 import { API_PORT } from "./configs/Configuration";
-import { ApiService } from "./infras/api/AppService";
-// import { ApiService2 } from "./infras/api/AppService2";
+// import { ApiService } from "./infras/api/AppService";
+import { ApiService2 } from "./infras/api/AppService2";
 import { Container } from "typedi";
 import { IDbContext } from "./core/shared/database/interfaces/IDbContext";
 import cluster from "cluster";
@@ -12,7 +12,7 @@ import os from "os";
 const dbContext = Container.get<IDbContext>("db.context");
 const startApplication = async (): Promise<void> => {
   await dbContext.createConnection();
-  ApiService.init( Number(API_PORT) );
+  ApiService2.init( Number(API_PORT) );
 };
 
 if (process.env.NODE_ENV != "production") {

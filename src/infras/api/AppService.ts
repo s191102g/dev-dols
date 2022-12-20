@@ -9,6 +9,7 @@
 // import { HttpServer } from "../servers/HttpServer";
 // import { Server } from "http";
 // import { ApiAuthenticator } from "./ApiAuthenticator";
+
 // export class ApiService {
 //   static init(port: number, callback?: () => void): Server {
 //     const app = express();
@@ -16,6 +17,7 @@
 //     app.get("/", (_req, res) => {
 //       res.status(200).end("ok");
 //     });
+  
   
 
 //     const loggingMiddleware = logger.createMiddleware();

@@ -11,6 +11,16 @@ import { HttpServer } from "../servers/HttpServer";
 import { ApiAuthenticator } from "./ApiAuthenticator";
 import * as fs from 'fs';
 import * as https from 'https'
+import * as paypal from 'paypal-rest-sdk';
+import { CLIENT_ID, CLIENT_SECRET, MODE } from "../../configs/Configuration";
+import { SystemError } from "../../core/shared/exceptions/SystemError";
+import { MessageError } from "../../core/shared/exceptions/message/MessageError";
+paypal.configure({
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET,
+  mode: MODE
+})
+
 export class ApiService2 {
   static init(port: number, callback?: () => void): void {
     const app = express();
@@ -21,6 +31,50 @@ export class ApiService2 {
     app.get("/.well-known/pki-validation/27E7AEDA4DCCE24B80EEF67289EA7DF5.txt", (_req, res) => {
       res.sendFile('/home/ec2-user/dev-dols/27E7AEDA4DCCE24B80EEF67289EA7DF5.txt')
     });
+    app.post('/api/v1/payment',(_req, res)=>{
+      const create_payment_json = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": "http://localhost:3000/success",
+            "cancel_url": "http://localhost:3000/cancel"
+        },
+        "transactions": [{
+            "item_list": {
+                "items": [{
+                    "name": "Nâng cấp dịch vụ tại DOLS",
+                    "sku": "001",
+                    "price": "1.00",
+                    "currency": "USD",
+                    "quantity": 1
+                }]
+            },
+            "amount": {
+                "currency": "USD",
+                "total": "1.00"
+            },
+            "description": "Nâng cấp dịch vụ tại DOLS"
+        }]
+    }
+
+    paypal.payment.create(create_payment_json, function (error, payment) {
+      if (error) {
+          throw new SystemError(MessageError.SOMETHING_WRONG)
+      } 
+      if(!payment){
+          throw new SystemError(MessageError.SOMETHING_WRONG)
+      }
+      for (let i = 0; i < payment.links.length; i++) {
+          if (payment.links[i].rel === 'approval_url') {
+             res.redirect(payment.links[i].href)
+          }
+      }
+
+      
+  });
+})
     const key = fs.readFileSync('/home/ec2-user/dev-dols/private.key');
     const cert= fs.readFileSync('/home/ec2-user/dev-dols/certificate.crt')
     // const loggingMiddleware = logger.createMiddleware();

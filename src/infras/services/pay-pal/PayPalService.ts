@@ -54,7 +54,8 @@ export class PaypalService implements IPaypalService{
             }
             for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === 'approval_url') {
-                  payment.links[i].href
+                   console.log(payment.links[i].href);
+                     
                 }
             }
 
@@ -65,3 +66,5 @@ export class PaypalService implements IPaypalService{
     }
 }
 
+// /success?paymentId=PAYID-MOQZE4I0WA46049KH1111607&token=EC-66E39269D49218020&PayerID=38M54HJMSFWZC
+// /cancel?token=EC-66E39269D49218020

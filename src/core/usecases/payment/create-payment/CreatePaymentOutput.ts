@@ -2,11 +2,11 @@ import { IsString } from "class-validator";
 import { DataResponse } from "../../../shared/usecase/DataResponse";
 
 
-export class CreatePaymentOutput extends DataResponse<string>{
+export class CreatePaymentOutput extends DataResponse<any>{
     @IsString()
-    data: string;
+    data: any;
 
-    setData(val:string){
+    setData(val:any){
         this.data = val
     }
 }

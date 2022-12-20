@@ -2,7 +2,7 @@ import { IsString } from "class-validator";
 
 export class GetByYearInput{
     @IsString()
-    yearStart: string;
+    Start: string;
     @IsString()
-    yearEnd: string;
+    End: string;
 }

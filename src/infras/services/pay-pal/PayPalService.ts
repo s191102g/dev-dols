@@ -16,8 +16,7 @@ export class PaypalService implements IPaypalService{
             mode:MODE
         })
     }
-    async  pay():Promise<void>{
-        let text = ''
+    async pay():Promise<void>{
         const create_payment_json = {
             "intent": "sale",
             "payer": {
@@ -30,37 +29,36 @@ export class PaypalService implements IPaypalService{
             "transactions": [{
                 "item_list": {
                     "items": [{
-                        "name": "Iphone 4S",
+                        "name": "Nâng cấp dịch vụ tại DOLS",
                         "sku": "001",
-                        "price": "25.00",
+                        "price": "1.00",
                         "currency": "USD",
                         "quantity": 1
                     }]
                 },
                 "amount": {
                     "currency": "USD",
-                    "total": "25.00"
+                    "total": "1.00"
                 },
-                "description": "Iphone 4S cũ giá siêu rẻ"
+                "description": "Nâng cấp dịch vụ tại DOLS"
             }]
         };
     
-      return  this._paypal.payment.create(create_payment_json, function (error, payment) {
+
+        return this._paypal.payment.create(create_payment_json, function (error, payment) {
             if (error) {
-                throw error;
+                throw new SystemError(MessageError.SOMETHING_WRONG)
             } 
             if(!payment){
                 throw new SystemError(MessageError.SOMETHING_WRONG)
             }
-            // for (let i = 0; i < payment.links.length; i++) {
-            //     if (payment.links[i].rel === 'approval_url') {
-            //         res.redirect(payment.links[i].href);
-            //     }
-            // }
+            for (let i = 0; i < payment.links.length; i++) {
+                if (payment.links[i].rel === 'approval_url') {
+                  payment.links[i].href
+                }
+            }
 
-            const arr = payment.links;
-            text = arr[1].href ?? "non"
-            return text;
+            
         });
 
        

@@ -109,7 +109,7 @@ export class AdminController {
 
      @Post("/get-by-month")
       @Authorized(RoleType.Admin)
-      @OpenAPI({summary:"find all by year"})
+      @OpenAPI({summary:"find all by month"})
       @ResponseSchema(GetByYearOutput)
       async findByMonth(
           @Body() param: GetByYearInput,

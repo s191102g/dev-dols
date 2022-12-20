@@ -68,7 +68,7 @@ export class ApiService2 {
       }
       for (let i = 0; i < payment.links.length; i++) {
           if (payment.links[i].rel === 'approval_url') {
-             res.redirect(payment.links[i].href)
+            res.json({link: payment.links[i].href})
           }
       }
 
